@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "MapLeadScraper - Free Google Maps Scraper",
+  "version": "2.2.5",
+  "description": "A smart scraper for leads, export or save Maps result pages to XLSX/CSV file.",
+  "host_permissions": [
+    "*://google.com/maps/*",
+    "*://www.google.com/maps/*"
+  ],
+  "background": {
+    "service_worker": "src/pages/background/index.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/pages/popup/index.html",
+    "default_icon": "icon-34.png"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://google.com/maps/*",
+        "*://www.google.com/maps/*"
+      ],
+      "js": [
+        "src/pages/content/index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "injected.js",
+        "icons/*",
+        "icon-128.png"
+      ],
+      "matches": [
+        "*://*.google.com/*"
+      ]
+    }
+  ]
+}
